@@ -1,32 +1,32 @@
-import { useNavigate } from 'react-router-dom';
-import MyButton from './MyButton';
+import { useNavigate } from "react-router-dom";
+import MyButton from "./MyButton";
 
-function DiaryItem({ id, date, selectedEmotion, content }) {
+function DiaryItem({ _id, today, emotion, contents }) {
   const navigate = useNavigate();
   return (
     <div className="DiaryItem">
       <div
-        className={[`emotion_img_wrapper emotion_img_wrapper_${selectedEmotion}`]}
+        className={[`emotion_img_wrapper emotion_img_wrapper_${emotion}`]}
         onClick={() => {
           navigate(`/detail/${id}`);
         }}
       >
-        <img src={`/assets/emotion${selectedEmotion}.png`} alt="" />
+        <img src={`/assets/emotion${emotion}.png`} alt="" />
       </div>
       <div
         className="info_wrapper"
         onClick={() => {
-          navigate(`/detail/${id}`);
+          navigate(`/detail/${_id}`);
         }}
       >
-        <div className="diary_date">{date}</div>
-        <div className="diary_content_preview">{content}</div>
+        <div className="diary_date">{today}</div>
+        <div className="diary_content_preview">{contents}</div>
       </div>
       <div className="btn_wrapper">
         <MyButton
-          text={'수정하기'}
+          text={"수정하기"}
           onClick={() => {
-            navigate(`/edit/${id}`);
+            navigate(`/edit/${_id}`);
           }}
         />
       </div>

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { DiaryStateContext } from "../App";
@@ -8,14 +8,16 @@ import MyHeader from "../components/MyHeader";
 import { fetchDiarys } from "../apis/index";
 const Home = () => {
   const navigate = useNavigate();
-  const diaryList = useContext(DiaryStateContext);
+  //const diaryList = useContext(DiaryStateContext);
+
+  const [diaryList, setDiaryList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetchDiarys();
       console.log(res);
+      setDiaryList(res);
     };
-
     fetchData();
   }, []);
 
@@ -42,7 +44,7 @@ const Home = () => {
           </div>
         </div>
         {diaryList.map((item) => (
-          <DiaryItem key={item.id} {...item} />
+          <DiaryItem key={item._id} {...item} />
         ))}
       </div>
     </>
