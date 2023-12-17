@@ -1,25 +1,27 @@
-import { useParams } from 'react-router-dom';
-import DiaryEditor from '../components/DiaryEditor';
-import { DiaryStateContext } from '../App';
-import { useContext, useState } from 'react';
-import { useEffect } from 'react';
+import { useParams } from "react-router-dom";
+import DiaryEditor from "../components/DiaryEditor";
+import { DiaryStateContext } from "../App";
+import { useContext, useState } from "react";
+import { useEffect } from "react";
+import { fetchDiary } from "../apis";
 
 function Edit() {
-  const { id } = useParams();
+  const { _id } = useParams();
   const diaryList = useContext(DiaryStateContext);
-  const [data, setData] = useState();
+  const [diary, setDiary] = useState([]);
 
   useEffect(() => {
-    const thisDiary = diaryList.find((item) => item.id === parseInt(id));
-    if (thisDiary) {
-      setData(thisDiary);
-    }
-  }, [data, id, diaryList]);
+    const fetchData = async () => {
+      const res = await fetchDiary(_id);
+      setDiary(res);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div>
-      {JSON.stringify(data)}
-      {data && <DiaryEditor isEdit={true} originDiary={data} />}
+      {JSON.stringify(diary)}
+      {diary && <DiaryEditor isEdit={true} originDiary={diary} />}
     </div>
   );
 }

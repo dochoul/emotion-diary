@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 
 :root {
   color-scheme: light only !important;
@@ -10,7 +10,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Nanum Pen Script', cursive;
+  font-family: "Nanum Pen Script", cursive;
   min-height: 100vh;
   margin: 0;
 }
@@ -46,7 +46,7 @@ body {
   padding: 10px 20px;
   font-size: 18px;
   white-space: nowrap;
-  font-family: 'Nanum Pen Script';
+  font-family: "Nanum Pen Script";
 }
 .MyButton.MyButton_default {
   background-color: #ececec;
@@ -85,7 +85,7 @@ header .head_btn_right {
   justify-content: end;
 }
 header button {
-  font-family: 'Nanum Pen Script';
+  font-family: "Nanum Pen Script";
 }
 
 .DiaryList .menu_wrapper {
@@ -109,7 +109,7 @@ header button {
   padding: 10px 20px;
   cursor: pointer;
   font-size: 18px;
-  font-family: 'Nanum Pen Script';
+  font-family: "Nanum Pen Script";
 }
 
 .DiaryItem {
@@ -175,7 +175,7 @@ header button {
   padding: 10px 20px;
   cursor: pointer;
   font-size: 20px;
-  font-family: 'Nanum Pen Script';
+  font-family: "Nanum Pen Script";
 }
 .DiaryEditor .emotion_wrapper {
   display: grid;
@@ -183,7 +183,7 @@ header button {
   gap: 2%;
 }
 .DiaryEditor textarea {
-  font-family: 'Nanum Pen Script';
+  font-family: "Nanum Pen Script";
   box-sizing: border-box;
   width: 100%;
   min-height: 200px;
@@ -295,7 +295,7 @@ header button {
   padding: 20px;
   text-align: left;
   font-size: 20px;
-  font-family: 'Nanum Pen Script';
+  font-family: "Nanum Pen Script";
   font-weight: 400;
   line-height: 2.5;
 }

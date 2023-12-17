@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState, useContext } from 'react';
-import { emotionList } from '../util/emotion';
-import { getStringDate } from '../util/date';
-import MyButton from './MyButton';
-import { useNavigate } from 'react-router-dom';
-import { DiaryDispatchContext } from '../App';
+import { useEffect, useRef, useState } from "react";
+import { emotionList } from "../util/emotion";
+import { getStringDate } from "../util/date";
+import { useNavigate } from "react-router-dom";
+import { createDiary } from "../apis";
+import MyButton from "./MyButton";
+import MyHeader from "./MyHeader";
 
 const DiaryEditor = ({ isEdit, originDiary }) => {
   const [date, setDate] = useState(getStringDate(new Date()));
@@ -11,11 +12,11 @@ const DiaryEditor = ({ isEdit, originDiary }) => {
   const [content, setContent] = useState();
   const navigate = useNavigate();
   const contentRef = useRef();
-  const { onCreate } = useContext(DiaryDispatchContext);
 
   useEffect(() => {
+    console.log(date);
     console.log(isEdit, originDiary);
-    if (isEdit) setSelectedEmotion(originDiary.selectedEmotion);
+    if (isEdit) setSelectedEmotion(originDiary.emotion);
   }, []);
 
   const $_clickEmotion = (seletedEmotionId) => {
@@ -27,18 +28,18 @@ const DiaryEditor = ({ isEdit, originDiary }) => {
       contentRef.current.focus();
       return;
     }
-    if (window.confirm('새로운 일기를 작성하시겠습니까?')) {
-      onCreate({
-        date,
-        selectedEmotion,
-        content,
-      });
+    if (window.confirm("새로운 일기를 작성하시겠습니까?")) {
+      createDiary(date, selectedEmotion, content);
     }
-    navigate('/');
+    //navigate("/");
   };
 
   return (
     <div className="DiaryEditor">
+      <MyHeader
+        headText="새 일기 쓰기"
+        leftChild={<MyButton text={"< 뒤로가기"} />}
+      />
       <div>
         <section>
           <h4>오늘은 언제인가요?</h4>
@@ -46,7 +47,7 @@ const DiaryEditor = ({ isEdit, originDiary }) => {
             <input
               className="input_date"
               type="date"
-              value={isEdit ? originDiary.date : date}
+              value={isEdit ? originDiary.today : date}
               onChange={(e) => {
                 setDate(e.target.value);
               }}
@@ -60,11 +61,11 @@ const DiaryEditor = ({ isEdit, originDiary }) => {
               <div
                 key={item.emotion_id}
                 className={[
-                  'EmotionItem',
+                  "EmotionItem",
                   item.emotion_id === selectedEmotion
                     ? `EmotionItem_on_${selectedEmotion}`
-                    : 'EmotionItem_off',
-                ].join(' ')}
+                    : "EmotionItem_off",
+                ].join(" ")}
                 onClick={() => $_clickEmotion(item.emotion_id)}
               >
                 <img src={item.emotion_img} alt="" />
@@ -89,12 +90,16 @@ const DiaryEditor = ({ isEdit, originDiary }) => {
         <section>
           <div className="control_box">
             <MyButton
-              text={'취소하기'}
+              text={"취소하기"}
               onClick={() => {
-                navigate('/');
+                navigate("/");
               }}
             />
-            <MyButton text={'작성완료'} type={'positive'} onClick={$_onSubmit} />
+            <MyButton
+              text={"작성완료"}
+              type={"positive"}
+              onClick={$_onSubmit}
+            />
           </div>
         </section>
       </div>

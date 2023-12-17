@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { DiaryStateContext } from "../App";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import { emotionList } from "../util/emotion";
@@ -8,8 +7,6 @@ import { fetchDiary } from "../apis";
 
 function Detail() {
   const { _id } = useParams();
-  const diaryList = useContext(DiaryStateContext);
-  const [data, setData] = useState();
   const navigate = useNavigate();
   const [diary, setDiary] = useState([]);
 

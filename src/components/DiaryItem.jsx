@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import MyButton from "./MyButton";
 
-function DiaryItem({ _id, today, emotion, contents }) {
+function DiaryItem({ _id, date, emotion, content }) {
   const navigate = useNavigate();
   return (
     <div className="DiaryItem">
@@ -19,8 +19,8 @@ function DiaryItem({ _id, today, emotion, contents }) {
           navigate(`/detail/${_id}`);
         }}
       >
-        <div className="diary_date">{today}</div>
-        <div className="diary_content_preview">{contents}</div>
+        <div className="diary_date">{date}</div>
+        <div className="diary_content_preview">{content}</div>
       </div>
       <div className="btn_wrapper">
         <MyButton

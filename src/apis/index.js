@@ -24,6 +24,20 @@ export async function fetchDiary(id) {
   return data.book;
 }
 
+export async function deleteDiary(id) {
+  const { data } = await instance.delete(`books/${id}`);
+  return data.book;
+}
+
+export async function createDiary(date, selectedEmotion, content) {
+  const { data } = await instance.post("books", {
+    date,
+    emotion: selectedEmotion,
+    content,
+  });
+  return data;
+}
+
 // interface DiaryProps {
 //   "_id": number,
 //   "name": string,
