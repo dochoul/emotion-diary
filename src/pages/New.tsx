@@ -47,7 +47,7 @@ const New = () => {
     <div className="DiaryEditor">
       <MyHeader
         headText="새 일기쓰기"
-        leftChild={<MyButton text="< 뒤로가기" onClick={() => navigate(-1)} />}
+        leftChild={<MyButton text="< 뒤로가기" onClick={() => navigate("/")} />}
       />
       <form onSubmit={handleSubmit}>
         <section>
