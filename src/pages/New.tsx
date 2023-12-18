@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { createDiary, fetchDiaryAll } from "../apis";
 import MyHeader from "../components/MyHeader";
@@ -11,6 +11,7 @@ const New = () => {
   const [date, setDate] = useState<string>(now.format("YYYY-MM-DD"));
   const [emotion, setEmotion] = useState<number>(3);
   const [content, setContent] = useState<string>("");
+  const contentRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -33,11 +34,19 @@ const New = () => {
   };
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
-    const newData = { date, emotion, content };
     e.preventDefault();
+    const newData = { date, emotion, content };
+
+    if (!content && contentRef.current) {
+      contentRef.current.focus();
+      return;
+    }
+
     try {
-      const res = await createDiary(newData);
-      console.log(res);
+      if (window.confirm("새로운 일기를 작성하시겠습니까?")) {
+        await createDiary(newData);
+        navigate("/");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -130,6 +139,7 @@ const New = () => {
           <h4>오늘의 일기</h4>
           <div className="input_box text_wrapper">
             <textarea
+              ref={contentRef}
               placeholder="오늘은 어땠나요"
               value={content}
               onChange={handleContent}
