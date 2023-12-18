@@ -136,7 +136,21 @@ const New = () => {
             ></textarea>
           </div>
         </section>
-        <button type="submit">작성완료</button>
+        <section>
+          <div className="control_box">
+            <button
+              className="MyButton MyButton_default"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              취소하기
+            </button>
+            <button type="submit" className="MyButton MyButton_positive">
+              작성완료
+            </button>
+          </div>
+        </section>
       </form>
     </div>
   );
