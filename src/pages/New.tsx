@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import axios from "axios";
 import { createDiary, fetchDiaryAll } from "../apis";
+import MyHeader from "../components/MyHeader";
+import MyButton from "../components/MyButton";
+import { useNavigate } from "react-router-dom";
 
 const New = () => {
   const now = dayjs();
+  const navigate = useNavigate();
   const [date, setDate] = useState<string>(now.format("YYYY-MM-DD"));
   const [emotion, setEmotion] = useState<number>(3);
   const [content, setContent] = useState<string>("");
@@ -42,6 +45,10 @@ const New = () => {
 
   return (
     <div className="DiaryEditor">
+      <MyHeader
+        headText="새 일기쓰기"
+        leftChild={<MyButton text="< 뒤로가기" onClick={() => navigate(-1)} />}
+      />
       <form onSubmit={handleSubmit}>
         <section>
           <h4>오늘은 언제인가요?</h4>
@@ -56,57 +63,67 @@ const New = () => {
         </section>
         <section>
           <h4>오늘의 감정</h4>
-          <div>
-            <label htmlFor="emotion1" style={{ marginRight: "10px" }}>
-              완전 좋음
-              <input
-                id="emotion1"
-                type="radio"
-                value={1}
-                onChange={handleEmotion}
-                checked={emotion === 1}
-              />
-            </label>
-            <label htmlFor="emotion2" style={{ marginRight: "10px" }}>
-              좋음
-              <input
-                id="emotion2"
-                type="radio"
-                value={2}
-                onChange={handleEmotion}
-                checked={emotion === 2}
-              />
-            </label>
-            <label htmlFor="emotion3" style={{ marginRight: "10px" }}>
-              그럭저럭
-              <input
-                id="emotion3"
-                type="radio"
-                value={3}
-                onChange={handleEmotion}
-                checked={emotion === 3}
-              />
-            </label>
-            <label htmlFor="emotion4" style={{ marginRight: "10px" }}>
-              나쁨
-              <input
-                id="emotion4"
-                type="radio"
-                value={4}
-                onChange={handleEmotion}
-                checked={emotion === 4}
-              />
-            </label>
-            <label htmlFor="emotion5" style={{ marginRight: "10px" }}>
-              끔찍함
-              <input
-                id="emotion5"
-                type="radio"
-                value={5}
-                onChange={handleEmotion}
-                checked={emotion === 5}
-              />
-            </label>
+          <div className="input_box emotion_list_wrapper">
+            <div className="EmotionItem EmotionItem_off">
+              <label htmlFor="emotion1">
+                완전 좋음
+                <input
+                  id="emotion1"
+                  type="radio"
+                  value={1}
+                  onChange={handleEmotion}
+                  checked={emotion === 1}
+                />
+              </label>
+            </div>
+            <div className="EmotionItem EmotionItem_off">
+              <label htmlFor="emotion2">
+                좋음
+                <input
+                  id="emotion2"
+                  type="radio"
+                  value={2}
+                  onChange={handleEmotion}
+                  checked={emotion === 2}
+                />
+              </label>
+            </div>
+            <div className="EmotionItem EmotionItem_off">
+              <label htmlFor="emotion3">
+                그럭저럭
+                <input
+                  id="emotion3"
+                  type="radio"
+                  value={3}
+                  onChange={handleEmotion}
+                  checked={emotion === 3}
+                />
+              </label>
+            </div>
+            <div className="EmotionItem EmotionItem_off">
+              <label htmlFor="emotion4">
+                나쁨
+                <input
+                  id="emotion4"
+                  type="radio"
+                  value={4}
+                  onChange={handleEmotion}
+                  checked={emotion === 4}
+                />
+              </label>
+            </div>
+            <div className="EmotionItem EmotionItem_off">
+              <label htmlFor="emotion5">
+                끔찍함
+                <input
+                  id="emotion5"
+                  type="radio"
+                  value={5}
+                  onChange={handleEmotion}
+                  checked={emotion === 5}
+                />
+              </label>
+            </div>
           </div>
         </section>
         <section>
