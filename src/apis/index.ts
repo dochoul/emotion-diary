@@ -1,4 +1,5 @@
 import axios from "axios";
+import { CreateDiaryProps } from "../types/define";
 
 // const baseURL =
 //   process.env.NODE_ENV === "production"
@@ -14,34 +15,31 @@ const instance = axios.create({
   },
 });
 
-// interface PostProps {
-//   _id: string;
-//   content: string;
-//   createdAt: string;
-//   date: string;
-//   updatedAt: string;
-// }
-
+//* 다이어리 모두 가져오기
 export async function fetchDiaryAll() {
   const { data } = await instance.get("books");
   return data.books;
 }
 
-export async function fetchDiary(id: number) {
-  const response = await instance.get(`books/${id}`);
+//* 다이어리 아이디로 가져오기
+export async function fetchDiary(_id: string | undefined) {
+  const response = await instance.get(`books/${_id}`);
   return response;
 }
 
+//* 다이어리 삭제하기
+export async function deleteDiary(_id: string | undefined) {
+  const { data } = await instance.delete(`books/${_id}`);
+  return data.message;
+}
+
+//* 좋은 감정의 다이러리만
 export async function fetchGoodEmtion() {
   const { data } = await instance.get("books/good-emotion");
   return data.books;
 }
 
-interface CreateDiaryProps {
-  date: string;
-  emotion: number;
-  content: string;
-}
+//* 다이어리 쓰기
 export async function createDiary({
   date,
   emotion,

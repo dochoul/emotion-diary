@@ -1,11 +1,26 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { DiaryProps } from "../types/define";
+import { fetchDiaryAll } from "../apis";
 import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
+import DiaryItem from "../components/DiaryItem";
 import dayjs from "dayjs";
 
 const Home = () => {
   const now = dayjs();
   const navigate = useNavigate();
+  const [diary, setDiary] = useState<DiaryProps[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const res = await fetchDiaryAll();
+      console.log(res);
+      setDiary(res);
+    };
+    getData();
+  }, []);
+
   return (
     <div>
       <MyHeader
@@ -36,6 +51,10 @@ const Home = () => {
             />
           </div>
         </div>
+        {diary.map((item) => (
+          <DiaryItem diary={item} key={item._id} />
+        ))}
+        <div className="DiaryItem"></div>
       </div>
     </div>
   );
