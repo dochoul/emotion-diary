@@ -1,9 +1,11 @@
 import axios from "axios";
 
-const baseURL =
-  process.env.NODE_ENV === "production"
-    ? "https://tasteless-bianka-david-kim.koyeb.app/"
-    : "http://localhost:9000/";
+// const baseURL =
+//   process.env.NODE_ENV === "production"
+//     ? "https://tasteless-bianka-david-kim.koyeb.app/"
+//     : "http://localhost:9000/";
+
+const baseURL = "https://tasteless-bianka-david-kim.koyeb.app/";
 
 const instance = axios.create({
   baseURL: baseURL,
@@ -28,6 +30,11 @@ export async function fetchDiaryAll() {
 export async function fetchDiary(id: number) {
   const response = await instance.get(`books/${id}`);
   return response;
+}
+
+export async function fetchGoodEmtion() {
+  const { data } = await instance.get("books/good-emotion");
+  return data.books;
 }
 
 interface CreateDiaryProps {

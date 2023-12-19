@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
-import { createDiary, fetchDiaryAll } from "../apis";
+import { createDiary, fetchDiaryAll, fetchGoodEmtion } from "../apis";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +15,7 @@ const New = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetchDiaryAll();
+      const res = await fetchGoodEmtion();
       console.log(res);
     };
     getData();
