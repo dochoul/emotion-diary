@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { DiaryProps } from "../types/define";
 import MyButton from "./MyButton";
+import { getStringDate } from "../util/date";
 
 const DiaryItem = ({ diary }: { diary: DiaryProps }) => {
   const navigate = useNavigate();
   return (
     <div className="DiaryItem">
       <div
+        onClick={() => {
+          navigate(`/diary/${diary._id}`);
+        }}
         className={`emotion_img_wrapper emotion_img_wrapper_${diary.emotion}`}
       >
         <img src={`assets/emotion${diary.emotion}.png`} alt="" />
@@ -17,7 +21,7 @@ const DiaryItem = ({ diary }: { diary: DiaryProps }) => {
           navigate(`/diary/${diary._id}`);
         }}
       >
-        <div className="diary_date">{diary.date}</div>
+        <div className="diary_date">{getStringDate(diary.date)}</div>
         <div className="diary_content_preview">{diary.content}</div>
       </div>
       <div className="btn_wrapper">

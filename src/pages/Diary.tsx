@@ -4,11 +4,13 @@ import { fetchDiary } from "../apis";
 import { DiaryProps } from "../types/define";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
+import { getStringDate } from "../util/date";
 
 const Diary = () => {
   const { _id } = useParams();
   const navigate = useNavigate();
   const [diary, setDiary] = useState<DiaryProps>(Object);
+  const [date, setDate] = useState<string>("2017-05-31");
 
   //* 가져오기
   useEffect(() => {
@@ -16,6 +18,7 @@ const Diary = () => {
       const res: DiaryProps = await fetchDiary(_id);
       console.log(res);
       setDiary(res);
+      setDate(getStringDate(res.date));
     };
     getData();
   }, [_id]);
@@ -23,7 +26,7 @@ const Diary = () => {
   return (
     <div className="DiaryPage">
       <MyHeader
-        headText={`${diary?.date}기록`}
+        headText={`${date} 기록`}
         leftChild={<MyButton text="< 뒤로가기" onClick={() => navigate("/")} />}
         rightChild={
           <MyButton

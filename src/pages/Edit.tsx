@@ -1,14 +1,20 @@
 import { useNavigate, useParams } from "react-router-dom";
 import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
-import { deleteDiary, fetchDiary } from "../apis";
-import { useEffect, useState } from "react";
+import { deleteDiary, editDiary, fetchDiary } from "../apis";
+import { useEffect, useRef, useState } from "react";
 import { DiaryProps } from "../types/define";
+import { emotionList } from "../data/emotionList";
+import { getStringDate } from "../util/date";
 
 const Edit = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
   const [diary, setDiary] = useState<DiaryProps>(Object);
+  const [date, setDate] = useState<string>("2017-05-31");
+  const [emotion, setEmotion] = useState<number>(3);
+  const [content, setContent] = useState<string>("");
+  const contentRef = useRef<HTMLTextAreaElement>(null);
 
   //* 가져오기
   useEffect(() => {
@@ -16,13 +22,16 @@ const Edit = () => {
       const res: DiaryProps = await fetchDiary(_id);
       console.log(res);
       setDiary(res);
+      setDate(res.date);
+      setEmotion(res.emotion);
+      setContent(res.content);
     };
     getData();
   }, [_id]);
 
   const 삭제하기 = async () => {
     try {
-      if (window.confirm("정말 삭제하시겠습니까?")) {
+      if (window.confirm("일기를 수정하시겠습니까?")) {
         await deleteDiary(_id);
         navigate("/");
       }
@@ -31,9 +40,39 @@ const Edit = () => {
     }
   };
 
+  const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDate(e.target.value);
+  };
+
+  const handleEmotion = (id: number) => {
+    setEmotion(id);
+  };
+
+  const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newData = { date, emotion, content };
+
+    if (!content && contentRef.current) {
+      contentRef.current.focus();
+      return;
+    }
+
+    try {
+      if (window.confirm("일기를 수정하시겠습니까?")) {
+        await editDiary(_id, newData);
+        navigate("/");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <div>
-      {JSON.stringify(diary)}
+    <div className="DiaryEditor">
       <MyHeader
         headText="일기 수정하기"
         leftChild={<MyButton text="< 뒤로가기" onClick={() => navigate("/")} />}
@@ -47,6 +86,67 @@ const Edit = () => {
           />
         }
       />
+      <form onSubmit={handleSubmit}>
+        <section>
+          <h4>오늘은 언제인가요?</h4>
+          <div className="input_box">
+            <input
+              type="date"
+              className="input_date"
+              value={getStringDate(date)}
+              onChange={handleDate}
+            />
+          </div>
+        </section>
+        <section>
+          <h4>오늘의 감정</h4>
+          <div className="input_box emotion_list_wrapper">
+            {emotionList.map((item, index) => (
+              <div
+                key={item.id}
+                className={[
+                  "EmotionItem",
+                  item.id === emotion
+                    ? `EmotionItem_on_${emotion}`
+                    : "EmotionItem_off",
+                ].join(" ")}
+                onClick={() => {
+                  handleEmotion(item.id);
+                }}
+              >
+                <img src={item.src} alt="" />
+                <span>{item.description}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h4>오늘의 일기</h4>
+          <div className="input_box text_wrapper">
+            <textarea
+              ref={contentRef}
+              placeholder="오늘은 어땠나요"
+              value={content}
+              onChange={handleContent}
+            ></textarea>
+          </div>
+        </section>
+        <section>
+          <div className="control_box">
+            <button
+              className="MyButton MyButton_default"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              취소하기
+            </button>
+            <button type="submit" className="MyButton MyButton_positive">
+              작성완료
+            </button>
+          </div>
+        </section>
+      </form>
     </div>
   );
 };

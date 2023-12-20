@@ -51,12 +51,12 @@ export async function createDiary({
   return response;
 }
 
-//* 다이어리 아이디로 가져오기
+//* 다이어리 수정하기
 export async function editDiary(
   _id: string | undefined,
   { date, emotion, content }: CreateDiaryProps
 ) {
-  const response = await instance.put("books", {
+  const response = await instance.put(`books/${_id}`, {
     date,
     emotion,
     content,
