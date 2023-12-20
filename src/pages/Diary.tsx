@@ -10,6 +10,7 @@ const Diary = () => {
   const navigate = useNavigate();
   const [diary, setDiary] = useState<DiaryProps>(Object);
 
+  //* 가져오기
   useEffect(() => {
     const getData = async () => {
       const res: DiaryProps = await fetchDiary(_id);
