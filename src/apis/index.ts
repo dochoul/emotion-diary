@@ -14,8 +14,11 @@ const instance = axios.create({
 });
 
 //* 다이어리 모두 가져오기
-export async function fetchDiaryAll() {
-  const { data } = await instance.get("books");
+export async function fetchDiaryAll(
+  sort: string = "latest",
+  emotion: string = "all"
+) {
+  const { data } = await instance.get(`books?sort=${sort}&emotion=${emotion}`);
   return data.books;
 }
 
@@ -29,12 +32,6 @@ export async function fetchDiary(_id: string | undefined) {
 export async function deleteDiary(_id: string | undefined) {
   const { data } = await instance.delete(`books/${_id}`);
   return data.message;
-}
-
-//* 좋은 감정의 다이러리만
-export async function fetchGoodEmtion() {
-  const { data } = await instance.get("books/good-emotion");
-  return data.books;
 }
 
 //* 다이어리 쓰기

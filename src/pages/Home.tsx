@@ -11,15 +11,24 @@ const Home = () => {
   const now = dayjs();
   const navigate = useNavigate();
   const [diary, setDiary] = useState<DiaryProps[]>([]);
+  const [sort, setSort] = useState<string>("latest");
+  const [emotion, setEmotion] = useState<string>("all");
 
   useEffect(() => {
     const getData = async () => {
       const res = await fetchDiaryAll();
-      console.log(res);
       setDiary(res);
     };
     getData();
   }, []);
+
+  useEffect(() => {
+    const changeDiary = async () => {
+      const res = await fetchDiaryAll(sort, emotion);
+      setDiary(res);
+    };
+    changeDiary();
+  }, [sort, emotion]);
 
   return (
     <div>
@@ -31,11 +40,21 @@ const Home = () => {
       <div className="DiaryList">
         <div className="menu_wrapper">
           <div className="left_col">
-            <select className="ControlMenu">
+            <select
+              className="ControlMenu"
+              onChange={(e) => {
+                setSort(e.target.value);
+              }}
+            >
               <option value="latest">최신순</option>
               <option value="oldest">오래된 순</option>
             </select>
-            <select className="ControlMenu">
+            <select
+              className="ControlMenu"
+              onChange={(e) => {
+                setEmotion(e.target.value);
+              }}
+            >
               <option value="all">전부다</option>
               <option value="good">좋은 감정만</option>
               <option value="bad">안좋은 감정만</option>
@@ -54,7 +73,6 @@ const Home = () => {
         {diary.map((item) => (
           <DiaryItem diary={item} key={item._id} />
         ))}
-        <div className="DiaryItem"></div>
       </div>
     </div>
   );

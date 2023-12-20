@@ -10,9 +10,8 @@ import { getStringDate } from "../util/date";
 const Edit = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
-  const [diary, setDiary] = useState<DiaryProps>(Object);
   const [date, setDate] = useState<string>("2017-05-31");
-  const [emotion, setEmotion] = useState<number>(3);
+  const [emotion, setEmotion] = useState<number>(0);
   const [content, setContent] = useState<string>("");
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
@@ -20,8 +19,6 @@ const Edit = () => {
   useEffect(() => {
     const getData = async () => {
       const res: DiaryProps = await fetchDiary(_id);
-      console.log(res);
-      setDiary(res);
       setDate(res.date);
       setEmotion(res.emotion);
       setContent(res.content);

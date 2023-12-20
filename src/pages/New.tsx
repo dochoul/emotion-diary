@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import dayjs from "dayjs";
-import { createDiary, fetchGoodEmtion } from "../apis";
+import { createDiary } from "../apis";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import { useNavigate } from "react-router-dom";
@@ -13,14 +13,6 @@ const New = () => {
   const [emotion, setEmotion] = useState<number>(3);
   const [content, setContent] = useState<string>("");
   const contentRef = useRef<HTMLTextAreaElement>(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      const res = await fetchGoodEmtion();
-      console.log(res);
-    };
-    getData();
-  }, []);
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(e.target.value);
