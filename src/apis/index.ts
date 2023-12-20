@@ -1,12 +1,10 @@
 import axios from "axios";
 import { CreateDiaryProps } from "../types/define";
 
-// const baseURL =
-//   process.env.NODE_ENV === "production"
-//     ? "https://tasteless-bianka-david-kim.koyeb.app/"
-//     : "http://localhost:9000/";
-
-const baseURL = "https://tasteless-bianka-david-kim.koyeb.app/";
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://tasteless-bianka-david-kim.koyeb.app/"
+    : "http://localhost:9000/";
 
 const instance = axios.create({
   baseURL: baseURL,
@@ -23,8 +21,8 @@ export async function fetchDiaryAll() {
 
 //* 다이어리 아이디로 가져오기
 export async function fetchDiary(_id: string | undefined) {
-  const response = await instance.get(`books/${_id}`);
-  return response;
+  const { data } = await instance.get(`books/${_id}`);
+  return data.book;
 }
 
 //* 다이어리 삭제하기

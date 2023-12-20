@@ -11,7 +11,12 @@ const DiaryItem = ({ diary }: { diary: DiaryProps }) => {
       >
         <img src={`assets/emotion${diary.emotion}.png`} alt="" />
       </div>
-      <div className="info_wrapper">
+      <div
+        className="info_wrapper"
+        onClick={() => {
+          navigate(`/diary/${diary._id}`);
+        }}
+      >
         <div className="diary_date">{diary.date}</div>
         <div className="diary_content_preview">{diary.content}</div>
       </div>
