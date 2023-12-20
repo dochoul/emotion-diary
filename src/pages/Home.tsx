@@ -23,6 +23,7 @@ const Home = () => {
 
   return (
     <div>
+      <h1>?????????????</h1>
       <MyHeader
         headText={`${now.format("YYYY")}년 ${now.format("MM")}월`}
         leftChild={<MyButton text="<" onClick={() => navigate("/")} />}
