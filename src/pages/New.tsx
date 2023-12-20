@@ -4,6 +4,7 @@ import { createDiary, fetchGoodEmtion } from "../apis";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import { useNavigate } from "react-router-dom";
+import { emotionList } from "../data/emotionList";
 
 const New = () => {
   const now = dayjs();
@@ -25,8 +26,8 @@ const New = () => {
     setDate(e.target.value);
   };
 
-  const handleEmotion = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmotion(Number(e.target.value));
+  const handleEmotion = (id: number) => {
+    setEmotion(id);
   };
 
   const handleContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -73,66 +74,23 @@ const New = () => {
         <section>
           <h4>오늘의 감정</h4>
           <div className="input_box emotion_list_wrapper">
-            <div className="EmotionItem EmotionItem_off">
-              <label htmlFor="emotion1">
-                완전 좋음
-                <input
-                  id="emotion1"
-                  type="radio"
-                  value={1}
-                  onChange={handleEmotion}
-                  checked={emotion === 1}
-                />
-              </label>
-            </div>
-            <div className="EmotionItem EmotionItem_off">
-              <label htmlFor="emotion2">
-                좋음
-                <input
-                  id="emotion2"
-                  type="radio"
-                  value={2}
-                  onChange={handleEmotion}
-                  checked={emotion === 2}
-                />
-              </label>
-            </div>
-            <div className="EmotionItem EmotionItem_off">
-              <label htmlFor="emotion3">
-                그럭저럭
-                <input
-                  id="emotion3"
-                  type="radio"
-                  value={3}
-                  onChange={handleEmotion}
-                  checked={emotion === 3}
-                />
-              </label>
-            </div>
-            <div className="EmotionItem EmotionItem_off">
-              <label htmlFor="emotion4">
-                나쁨
-                <input
-                  id="emotion4"
-                  type="radio"
-                  value={4}
-                  onChange={handleEmotion}
-                  checked={emotion === 4}
-                />
-              </label>
-            </div>
-            <div className="EmotionItem EmotionItem_off">
-              <label htmlFor="emotion5">
-                끔찍함
-                <input
-                  id="emotion5"
-                  type="radio"
-                  value={5}
-                  onChange={handleEmotion}
-                  checked={emotion === 5}
-                />
-              </label>
-            </div>
+            {emotionList.map((item, index) => (
+              <div
+                key={item.id}
+                className={[
+                  "EmotionItem",
+                  item.id === emotion
+                    ? `EmotionItem_on_${emotion}`
+                    : "EmotionItem_off",
+                ].join(" ")}
+                onClick={() => {
+                  handleEmotion(item.id);
+                }}
+              >
+                <img src={item.src} alt="" />
+                <span>{item.description}</span>
+              </div>
+            ))}
           </div>
         </section>
         <section>

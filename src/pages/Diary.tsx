@@ -25,7 +25,12 @@ const Diary = () => {
       <MyHeader
         headText={`${diary?.date}기록`}
         leftChild={<MyButton text="< 뒤로가기" onClick={() => navigate("/")} />}
-        rightChild={<MyButton text="수정하기" onClick={() => navigate("/")} />}
+        rightChild={
+          <MyButton
+            text="수정하기"
+            onClick={() => navigate(`/edit/${diary._id}`)}
+          />
+        }
       />
       <article>
         <section>

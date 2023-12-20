@@ -50,3 +50,16 @@ export async function createDiary({
   });
   return response;
 }
+
+//* 다이어리 아이디로 가져오기
+export async function editDiary(
+  _id: string | undefined,
+  { date, emotion, content }: CreateDiaryProps
+) {
+  const response = await instance.put("books", {
+    date,
+    emotion,
+    content,
+  });
+  return response;
+}
