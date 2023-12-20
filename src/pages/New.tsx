@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
-import { createDiary, fetchDiaryAll, fetchGoodEmtion } from "../apis";
+import { createDiary, fetchGoodEmtion } from "../apis";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import { useNavigate } from "react-router-dom";

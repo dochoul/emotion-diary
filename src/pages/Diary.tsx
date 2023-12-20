@@ -17,7 +17,7 @@ const Diary = () => {
       setDiary(res);
     };
     getData();
-  }, []);
+  }, [_id]);
 
   return (
     <div className="DiaryPage">
