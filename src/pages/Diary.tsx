@@ -18,7 +18,7 @@ const Diary = () => {
       const res: DiaryProps = await fetchDiary(_id);
       console.log(res);
       setDiary(res);
-      setDate(getStringDate(res.date));
+      setDate(res.date.slice(0, 10));
     };
     getData();
   }, [_id]);

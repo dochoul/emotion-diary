@@ -21,7 +21,7 @@ const DiaryItem = ({ diary }: { diary: DiaryProps }) => {
           navigate(`/diary/${diary._id}`);
         }}
       >
-        <div className="diary_date">{getStringDate(diary.date)}</div>
+        <div className="diary_date">{diary.date.slice(0, 10)}</div>
         <div className="diary_content_preview">{diary.content}</div>
       </div>
       <div className="btn_wrapper">

@@ -1,3 +1,3 @@
-export const getStringDate = (date: string) => {
-  return date.slice(0, 10);
+export const getStringDate = (date: Date) => {
+  return date.toISOString().slice(0, 10);
 };
