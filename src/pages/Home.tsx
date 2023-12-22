@@ -31,6 +31,7 @@ const Home = () => {
 
   return (
     <div>
+      1
       <MyHeader
         headText={`${year}년 ${month}월`}
         leftChild={<MyButton text="<" onClick={() => changeMonth(-1)} />}

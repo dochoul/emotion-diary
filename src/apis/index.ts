@@ -13,7 +13,7 @@ const instance = axios.create({
   },
 });
 
-//* 다이어리 모두 가져오기
+//* 다이어리 모두 가져오기~
 export async function fetchDiaryAll(
   year: string,
   month: string,
