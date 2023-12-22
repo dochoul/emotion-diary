@@ -8,34 +8,40 @@ import DiaryItem from "../components/DiaryItem";
 import dayjs from "dayjs";
 
 const Home = () => {
-  const now = dayjs();
   const navigate = useNavigate();
   const [diary, setDiary] = useState<DiaryProps[]>([]);
   const [sort, setSort] = useState<string>("latest");
   const [emotion, setEmotion] = useState<string>("all");
+  const [currentDate, setCurrentDate] = useState(dayjs());
+
+  const year: string = `${currentDate.format("YYYY")}`;
+  const month: string = `${currentDate.format("MM")}`;
 
   useEffect(() => {
     const getData = async () => {
-      const res = await fetchDiaryAll();
+      const res = await fetchDiaryAll(year, month, sort, emotion);
       setDiary(res);
     };
     getData();
-  }, []);
+  }, [year, month, sort, emotion]);
 
-  useEffect(() => {
-    const changeDiary = async () => {
-      const res = await fetchDiaryAll(sort, emotion);
-      setDiary(res);
-    };
-    changeDiary();
-  }, [sort, emotion]);
+  const changeMonth = (monthOffset: number) => {
+    setCurrentDate(currentDate.add(monthOffset, "month"));
+  };
 
   return (
     <div>
       <MyHeader
-        headText={`${now.format("YYYY")}년 ${now.format("MM")}월`}
-        leftChild={<MyButton text="<" onClick={() => navigate("/")} />}
-        rightChild={<MyButton text=">" onClick={() => navigate("/")} />}
+        headText={`${year}년 ${month}월`}
+        leftChild={<MyButton text="<" onClick={() => changeMonth(-1)} />}
+        rightChild={
+          <MyButton
+            text=">"
+            onClick={() => {
+              changeMonth(1);
+            }}
+          />
+        }
       />
       <div className="DiaryList">
         <div className="menu_wrapper">
@@ -79,3 +85,18 @@ const Home = () => {
 };
 
 export default Home;
+
+// useEffect(() => {
+//   const changeDiary = async () => {
+//     const res = await fetchDiaryAll(sort, emotion, year, month);
+//     setDiary(res);
+//   };
+//   changeDiary();
+// }, [sort, emotion, month]);
+
+// import dayjs from "dayjs";
+
+// export function getYearFormat(date:Date) {
+//   const noe = dayjs()
+//   return date.format("YYYY")
+// }

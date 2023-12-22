@@ -15,10 +15,14 @@ const instance = axios.create({
 
 //* 다이어리 모두 가져오기
 export async function fetchDiaryAll(
+  year: string,
+  month: string,
   sort: string = "latest",
   emotion: string = "all"
 ) {
-  const { data } = await instance.get(`books?sort=${sort}&emotion=${emotion}`);
+  const { data } = await instance.get(
+    `books?sort=${sort}&emotion=${emotion}&year=${year}&month=${month}`
+  );
   return data.books;
 }
 

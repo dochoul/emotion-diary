@@ -5,12 +5,11 @@ import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import { useNavigate } from "react-router-dom";
 import { emotionList } from "../data/emotionList";
-import { getStringDate } from "../util/date";
 
 const New = () => {
   const now = dayjs();
   const navigate = useNavigate();
-  const [date, setDate] = useState<string>(getStringDate(new Date()));
+  const [date, setDate] = useState<string>(now.format("YYYY-MM-DD"));
   const [emotion, setEmotion] = useState<number>(3);
   const [content, setContent] = useState<string>("");
   const contentRef = useRef<HTMLTextAreaElement>(null);
