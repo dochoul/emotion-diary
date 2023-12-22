@@ -5,7 +5,6 @@ import { deleteDiary, editDiary, fetchDiary } from "../apis";
 import { useEffect, useRef, useState } from "react";
 import { DiaryProps } from "../types/define";
 import { emotionList } from "../data/emotionList";
-import { getStringDate } from "../util/date";
 
 const Edit = () => {
   const navigate = useNavigate();

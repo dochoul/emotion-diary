@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { DiaryProps } from "../types/define";
 import MyButton from "./MyButton";
-import { getStringDate } from "../util/date";
 
 const DiaryItem = ({ diary }: { diary: DiaryProps }) => {
   const navigate = useNavigate();
