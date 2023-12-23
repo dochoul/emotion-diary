@@ -25,6 +25,11 @@ const Edit = () => {
       setContent(res.content);
     };
     getData();
+    //* 타이틀 설정하기
+    const htmlTitle = document.querySelector("title");
+    if (htmlTitle instanceof HTMLElement) {
+      htmlTitle.innerHTML = "수정하기";
+    }
   }, [_id]);
 
   const 삭제하기 = async () => {

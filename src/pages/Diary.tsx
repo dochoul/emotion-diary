@@ -20,6 +20,11 @@ const Diary = () => {
       setDate(res.date.slice(0, 10));
     };
     getData();
+    //* 오늘의기록
+    const htmlTitle = document.querySelector("title");
+    if (htmlTitle instanceof HTMLElement) {
+      htmlTitle.innerHTML = "오늘의 기록";
+    }
   }, [_id]);
 
   return (

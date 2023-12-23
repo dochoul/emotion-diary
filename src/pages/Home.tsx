@@ -24,6 +24,11 @@ const Home = () => {
       setDiary(res);
     };
     getData();
+    //* 새일기쓰기
+    const htmlTitle = document.querySelector("title");
+    if (htmlTitle instanceof HTMLElement) {
+      htmlTitle.innerHTML = "감정일기";
+    }
   }, [year, month, sort, emotion]);
 
   const changeMonth = (monthOffset: number) => {

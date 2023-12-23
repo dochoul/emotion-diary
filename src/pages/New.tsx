@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import { createDiary } from "../apis";
 import MyHeader from "../components/MyHeader";
@@ -13,6 +13,14 @@ const New = () => {
   const [emotion, setEmotion] = useState<number>(3);
   const [content, setContent] = useState<string>("");
   const contentRef = useRef<HTMLTextAreaElement>(null);
+
+  useEffect(() => {
+    //* 새일기쓰기
+    const htmlTitle = document.querySelector("title");
+    if (htmlTitle instanceof HTMLElement) {
+      htmlTitle.innerHTML = "새 일기쓰기";
+    }
+  }, []);
 
   const handleDate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDate(e.target.value);
