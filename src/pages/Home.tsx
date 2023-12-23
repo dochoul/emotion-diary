@@ -5,17 +5,18 @@ import { fetchDiaryAll } from "../apis";
 import MyButton from "../components/MyButton";
 import MyHeader from "../components/MyHeader";
 import DiaryItem from "../components/DiaryItem";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
+import { formatOfMonth, formatOfYear } from "../data/dateFormat";
 
 const Home = () => {
   const navigate = useNavigate();
   const [diary, setDiary] = useState<DiaryProps[]>([]);
   const [sort, setSort] = useState<string>("latest");
   const [emotion, setEmotion] = useState<string>("all");
-  const [currentDate, setCurrentDate] = useState(dayjs());
+  const [date, setDate] = useState<Dayjs>(dayjs());
 
-  const year: string = `${currentDate.format("YYYY")}`;
-  const month: string = `${currentDate.format("MM")}`;
+  const year: string = formatOfYear(date); //* 현재 년도
+  const month: string = formatOfMonth(date); //* 현재 월
 
   useEffect(() => {
     const getData = async () => {
@@ -26,12 +27,11 @@ const Home = () => {
   }, [year, month, sort, emotion]);
 
   const changeMonth = (monthOffset: number) => {
-    setCurrentDate(currentDate.add(monthOffset, "month"));
+    setDate(date.add(monthOffset, "month"));
   };
 
   return (
     <div>
-      1
       <MyHeader
         headText={`${year}년 ${month}월`}
         leftChild={<MyButton text="<" onClick={() => changeMonth(-1)} />}
@@ -86,18 +86,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// useEffect(() => {
-//   const changeDiary = async () => {
-//     const res = await fetchDiaryAll(sort, emotion, year, month);
-//     setDiary(res);
-//   };
-//   changeDiary();
-// }, [sort, emotion, month]);
-
-// import dayjs from "dayjs";
-
-// export function getYearFormat(date:Date) {
-//   const noe = dayjs()
-//   return date.format("YYYY")
-// }
