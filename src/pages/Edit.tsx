@@ -5,11 +5,13 @@ import { deleteDiary, editDiary, fetchDiary } from "../apis";
 import { useEffect, useRef, useState } from "react";
 import { DiaryProps } from "../types/define";
 import { emotionList } from "../data/emotionList";
+import dayjs from "dayjs";
+import { formatOfNow } from "../data/dateFormat";
 
 const Edit = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
-  const [date, setDate] = useState<string>("");
+  const [date, setDate] = useState<string>(formatOfNow(dayjs()));
   const [emotion, setEmotion] = useState<number>(0);
   const [content, setContent] = useState<string>("");
   const contentRef = useRef<HTMLTextAreaElement>(null);
