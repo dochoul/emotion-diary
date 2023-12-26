@@ -273,8 +273,10 @@ header button {
 }
 
 .EmotionItem img {
-  width: 50%;
+  /* width: 50%; */
   margin-bottom: 10px;
+  width: 59px;
+  height: 59px;
 }
 
 .EmotionItem span {
