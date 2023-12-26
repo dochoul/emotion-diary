@@ -138,13 +138,11 @@ header button {
 /* DiaryITem */
 
 .DiaryItem {
+  display: flex;
+  gap: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
-
   border-bottom: 1px solid #e2e2e2;
-
-  display: flex;
-  justify-content: space-between;
 }
 
 .DiaryItem .emotion_img_wrapper {
@@ -178,8 +176,9 @@ header button {
 
 .DiaryItem .info_wrapper {
   flex-grow: 1;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   cursor: pointer;
+  width: calc(100% - 242px);
 }
 
 .DiaryItem .diary_date {
@@ -190,10 +189,14 @@ header button {
 
 .DiaryItem .diary_content_preview {
   font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .DiaryItem .btn_wrapper {
-  min-width: 70px;
+  min-width: 82px;
+  margin-left: auto;
 }
 
 /* DiaryEditor */
