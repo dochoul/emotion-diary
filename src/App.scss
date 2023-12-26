@@ -40,31 +40,38 @@ body {
   cursor: pointer;
   border: none;
   border-radius: 5px;
-
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
-
   font-size: 18px;
-
   white-space: nowrap;
+  transition: background-color 0.15s ease-in-out;
   font-family: "Nanum Pen Script";
 }
 
 .MyButton_default {
   background-color: #ececec;
   color: black;
+  &:hover {
+    background-color: #c9c9c9;
+  }
 }
 
 .MyButton_positive {
   background-color: #64c964;
   color: white;
+  &:hover {
+    background-color: #47a147;
+  }
 }
 
 .MyButton_negative {
   background-color: #fd565f;
   color: white;
+  &:hover {
+    background-color: #de1620;
+  }
 }
 
 /* HEADER */
