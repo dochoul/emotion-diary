@@ -10,7 +10,7 @@ export default function MyButton({ text, type, onClick }: Props) {
   const btnType = ["positive", "negative"].includes(type) ? type : "default";
 
   return (
-    <Button className={`MyButton MyButton_${btnType}`} onClick={onClick}>
+    <Button className={`MyButton_${btnType}`} onClick={onClick}>
       {text}
     </Button>
   );
