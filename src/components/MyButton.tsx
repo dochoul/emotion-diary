@@ -32,10 +32,6 @@ const Button = styled.button`
   white-space: nowrap;
   font-family: "Nanum Pen Script";
   transition: background-color 0.15s ease-in-out;
-  &.MyButton_default {
-    background-color: #ececec;
-    color: black;
-  }
   &.MyButton_default:hover {
     background-color: #c9c9c9;
   }

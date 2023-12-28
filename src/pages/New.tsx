@@ -106,17 +106,13 @@ const New = () => {
         </section>
         <section>
           <div className="control_box">
-            <button
-              className="MyButton MyButton_default"
+            <MyButton
+              text="취소하기"
               onClick={() => {
                 navigate("/");
               }}
-            >
-              취소하기
-            </button>
-            <button type="submit" className="MyButton MyButton_positive">
-              작성완료
-            </button>
+            />
+            <MyButton text="작성완료" type="positive" onClick={() => {}} />
           </div>
         </section>
       </form>
