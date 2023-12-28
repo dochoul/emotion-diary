@@ -4,7 +4,7 @@ import { CreateDiaryProps } from "../types/define";
 const baseURL =
   process.env.NODE_ENV === "production"
     ? "https://tasteless-bianka-david-kim.koyeb.app/"
-    : "https://tasteless-bianka-david-kim.koyeb.app/";
+    : "http://localhost:9000/";
 
 const instance = axios.create({
   baseURL: baseURL,
