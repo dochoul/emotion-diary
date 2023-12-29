@@ -3,7 +3,7 @@ import { CreateDiaryProps } from "../types/define";
 
 const baseURL =
   process.env.NODE_ENV === "production"
-    ? "https://tasteless-bianka-david-kim.koyeb.app/"
+    ? "https://tasteless-bianka-david-kim.koyeb.app/api/"
     : "http://localhost:9000/";
 
 const instance = axios.create({
@@ -21,20 +21,20 @@ export async function fetchDiaryAll(
   emotion: string = "all"
 ) {
   const { data } = await instance.get(
-    `books?sort=${sort}&emotion=${emotion}&year=${year}&month=${month}`
+    `diary?sort=${sort}&emotion=${emotion}&year=${year}&month=${month}`
   );
   return data.books;
 }
 
 //* 다이어리 아이디로 가져오기
 export async function fetchDiary(_id: string | undefined) {
-  const { data } = await instance.get(`books/${_id}`);
+  const { data } = await instance.get(`diary/${_id}`);
   return data.book;
 }
 
 //* 다이어리 삭제하기
 export async function deleteDiary(_id: string | undefined) {
-  const { data } = await instance.delete(`books/${_id}`);
+  const { data } = await instance.delete(`diary/${_id}`);
   return data.message;
 }
 
@@ -44,7 +44,7 @@ export async function createDiary({
   emotion,
   content,
 }: CreateDiaryProps) {
-  const response = await instance.post("books", {
+  const response = await instance.post("diary", {
     date,
     emotion,
     content,
@@ -57,7 +57,7 @@ export async function editDiary(
   _id: string | undefined,
   { date, emotion, content }: CreateDiaryProps
 ) {
-  const response = await instance.put(`books/${_id}`, {
+  const response = await instance.put(`diary/${_id}`, {
     date,
     emotion,
     content,
