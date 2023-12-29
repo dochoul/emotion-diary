@@ -5,6 +5,7 @@ import { DiaryProps } from "../types/define";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
 import Loading from "../components/Loading";
+import { emotionList } from "../data/emotionList";
 
 const Diary = () => {
   const { _id } = useParams();
@@ -29,6 +30,10 @@ const Diary = () => {
       htmlTitle.innerHTML = "오늘의 기록";
     }
   }, [_id]);
+
+  const emotionDescription = (emotion:number) => {
+    return emotionList[emotion-1].description;
+  }
 
   return (
     <div className="DiaryPage">
@@ -55,7 +60,9 @@ const Diary = () => {
                 className={`diary_img_wrapper diary_img_wrapper_${diary.emotion}`}
               >
                 <img src={`/assets/emotion${diary.emotion}.png`} alt="" />
-                <div className="emotion_descript">그럭저럭</div>
+                <div className="emotion_descript">
+                  {emotionDescription(diary.emotion)}
+                </div>
               </div>
             </section>
             <section>
