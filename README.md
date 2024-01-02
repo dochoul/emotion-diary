@@ -1,6 +1,6 @@
 # 감정 다이어리
 
-[링크](https://my-emotion-diary.netlify.app/)
+# [링크](https://my-emotion-diary.netlify.app/)
 
 # Getting Started with Create React App
 
