@@ -32,7 +32,7 @@ const Home = () => {
         setIsLoading(true);
       }
     };
-    //getData();
+    getData();
     //* 새일기쓰기
     const htmlTitle = document.querySelector("title");
     if (htmlTitle instanceof HTMLElement) {
