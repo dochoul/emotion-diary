@@ -24,7 +24,7 @@ const Home = () => {
       const res = await fetchDiaryAll(year, month, sort, emotion);
       setDiary(res);
     };
-    //getData();
+    getData();
     //* 새일기쓰기
     const htmlTitle = document.querySelector("title");
     if (htmlTitle instanceof HTMLElement) {
