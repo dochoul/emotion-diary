@@ -207,8 +207,6 @@ export default function Tooltip({
       style={{ display: "inline-flex", cursor: "pointer" }}
       onMouseOver={makeTT}
       onMouseLeave={removeTT}
-      onFocus={makeTT}
-      onBlur={removeTT}
     >
       {children}
     </span>
