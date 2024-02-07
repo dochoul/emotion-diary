@@ -33,7 +33,8 @@ const Home = () => {
       }
     };
     getData();
-    //* 새일기쓰기
+
+    //* 타이틀 태그 설정
     const htmlTitle = document.querySelector("title");
     if (htmlTitle instanceof HTMLElement) {
       htmlTitle.innerHTML = "감정일기";

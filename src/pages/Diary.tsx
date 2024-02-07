@@ -4,7 +4,7 @@ import { fetchDiary } from "../apis";
 import { DiaryProps } from "../types/define";
 import MyHeader from "../components/MyHeader";
 import MyButton from "../components/MyButton";
-import Loading from "../components/Loading";
+import Loading from "../components/ui/Loading";
 import { emotionList } from "../data/emotionList";
 
 const Diary = () => {
@@ -31,9 +31,9 @@ const Diary = () => {
     }
   }, [_id]);
 
-  const emotionDescription = (emotion:number) => {
-    return emotionList[emotion-1].description;
-  }
+  const emotionDescription = (emotion: number) => {
+    return emotionList[emotion - 1].description;
+  };
 
   return (
     <div className="DiaryPage">
@@ -68,7 +68,8 @@ const Diary = () => {
             <section>
               <h4>오늘의 일기</h4>
               <div className="diary_content_wrapper">
-                <p>{diary.content}</p>
+                {/* <p>{diary.content}</p> */}
+                <p dangerouslySetInnerHTML={{ __html: diary.content }}></p>
               </div>
             </section>
           </article>
