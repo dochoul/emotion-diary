@@ -7,6 +7,7 @@ import MyHeader from "../components/MyHeader";
 import DiaryItem from "../components/DiaryItem";
 import dayjs, { Dayjs } from "dayjs";
 import { formatOfMonth, formatOfYear } from "../data/dateFormat";
+import Tooltip from "../components/ui/Tooltip";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Home = () => {
       const res = await fetchDiaryAll(year, month, sort, emotion);
       setDiary(res);
     };
-    getData();
+    //getData();
     //* 새일기쓰기
     const htmlTitle = document.querySelector("title");
     if (htmlTitle instanceof HTMLElement) {
@@ -39,14 +40,20 @@ const Home = () => {
     <div>
       <MyHeader
         headText={`${year}년 ${month}월`}
-        leftChild={<MyButton text="<" onClick={() => changeMonth(-1)} />}
+        leftChild={
+          <Tooltip label="이전 달" position="bottom" fontSize={20}>
+            <MyButton text="<" onClick={() => changeMonth(-1)} />
+          </Tooltip>
+        }
         rightChild={
-          <MyButton
-            text=">"
-            onClick={() => {
-              changeMonth(1);
-            }}
-          />
+          <Tooltip label="다음 달" position="bottom" fontSize={20}>
+            <MyButton
+              text=">"
+              onClick={() => {
+                changeMonth(1);
+              }}
+            />
+          </Tooltip>
         }
       />
       <div className="DiaryList">
