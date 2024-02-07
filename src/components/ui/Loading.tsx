@@ -6,7 +6,6 @@ const Wrapper = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
 `;
 const rotation = keyframes`
   0% {
@@ -22,12 +21,12 @@ const Spinner = styled.span`
   left: calc(50% - 24px);
   width: 48px;
   height: 48px;
-  border: 5px solid #fff;
+  border: 5px solid #64c964;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
-  animation: ${rotation} 1s linear infinite;
+  animation: ${rotation} 0.5s linear infinite;
 `;
 
 export default function Loading() {
