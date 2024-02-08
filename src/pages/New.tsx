@@ -15,7 +15,7 @@ const New = () => {
   const contentRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    //* 새일기쓰기
+    //* 타이틀태그
     const htmlTitle = document.querySelector("title");
     if (htmlTitle instanceof HTMLElement) {
       htmlTitle.innerHTML = "새 일기쓰기";
