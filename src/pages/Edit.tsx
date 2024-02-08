@@ -84,84 +84,81 @@ const Edit = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <div className="DiaryEditor">
-          <MyHeader
-            headText="일기 수정하기"
-            leftChild={
-              <MyButton text="< 뒤로가기" onClick={() => navigate("/")} />
-            }
-            rightChild={
+      {isLoading && <Loading />}
+      <div className="DiaryEditor">
+        <MyHeader
+          headText="일기 수정하기"
+          leftChild={
+            <MyButton text="< 뒤로가기" onClick={() => navigate("/")} />
+          }
+          rightChild={
+            <MyButton
+              text="삭제하기"
+              type="negative"
+              onClick={() => {
+                삭제하기();
+              }}
+            />
+          }
+        />
+        <form onSubmit={handleSubmit}>
+          <section>
+            <h4>오늘은 언제인가요?</h4>
+            <div className="input_box">
+              <input
+                type="date"
+                className="input_date"
+                value={date}
+                onChange={handleDate}
+              />
+            </div>
+          </section>
+          <section>
+            <h4>오늘의 감정</h4>
+            <div className="input_box emotion_list_wrapper">
+              {emotionList.map((item, index) => (
+                <div
+                  key={item.id}
+                  className={[
+                    "EmotionItem",
+                    item.id === emotion
+                      ? `EmotionItem_on_${emotion}`
+                      : "EmotionItem_off",
+                  ].join(" ")}
+                  onClick={() => {
+                    handleEmotion(item.id);
+                  }}
+                >
+                  <img src={item.src} alt="" />
+                  <span>{item.description}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+          <section>
+            <h4>오늘의 일기</h4>
+            <div className="input_box text_wrapper">
+              <textarea
+                ref={contentRef}
+                placeholder="오늘은 어땠나요"
+                value={content}
+                onChange={handleContent}
+              ></textarea>
+            </div>
+          </section>
+          <section>
+            <div className="control_box">
               <MyButton
-                text="삭제하기"
-                type="negative"
+                text="취소하기"
                 onClick={() => {
-                  삭제하기();
+                  navigate("/");
                 }}
               />
-            }
-          />
-          <form onSubmit={handleSubmit}>
-            <section>
-              <h4>오늘은 언제인가요?</h4>
-              <div className="input_box">
-                <input
-                  type="date"
-                  className="input_date"
-                  value={date}
-                  onChange={handleDate}
-                />
-              </div>
-            </section>
-            <section>
-              <h4>오늘의 감정</h4>
-              <div className="input_box emotion_list_wrapper">
-                {emotionList.map((item, index) => (
-                  <div
-                    key={item.id}
-                    className={[
-                      "EmotionItem",
-                      item.id === emotion
-                        ? `EmotionItem_on_${emotion}`
-                        : "EmotionItem_off",
-                    ].join(" ")}
-                    onClick={() => {
-                      handleEmotion(item.id);
-                    }}
-                  >
-                    <img src={item.src} alt="" />
-                    <span>{item.description}</span>
-                  </div>
-                ))}
-              </div>
-            </section>
-            <section>
-              <h4>오늘의 일기</h4>
-              <div className="input_box text_wrapper">
-                <textarea
-                  ref={contentRef}
-                  placeholder="오늘은 어땠나요"
-                  value={content}
-                  onChange={handleContent}
-                ></textarea>
-              </div>
-            </section>
-            <section>
-              <div className="control_box">
-                <MyButton
-                  text="취소하기"
-                  onClick={() => {
-                    navigate("/");
-                  }}
-                />
-                <MyButton text="작성완료" type="positive" onClick={() => {}} />
-              </div>
-            </section>
-          </form>
-        </div>
-      )}
+              <MyButton text="작성완료" type="positive" onClick={() => {}} />
+            </div>
+          </section>
+        </form>
+      </div>
     </>
   );
 };
